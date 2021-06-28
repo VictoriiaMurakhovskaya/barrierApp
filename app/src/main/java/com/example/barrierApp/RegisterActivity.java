@@ -3,11 +3,7 @@ package com.example.barrierApp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,6 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
         pushButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TextView login_view = findViewById(R.id.editTextTextPersonName2);
+                BarrierClient client = new BarrierClient();
+                client.addUser(login_view.toString(), ANDROID_ID);
                 finish();
             }
         });
