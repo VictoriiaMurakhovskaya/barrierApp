@@ -42,6 +42,11 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.android.libraries.places:places:2.4.0'
+    implementation 'org.apache.thrift:libthrift:0.14.1'
+    implementation 'org.slf4j:slf4j-api:1.5.8'
+    implementation 'org.slf4j:slf4j-log4j12:1.5.2'
+    implementation 'log4j:log4j:1.2.17'
+    implementation 'org.apache.commons:commons-lang3:3.1'
     testImplementation'junit:junit:4.12'
 }
 
@@ -50,5 +55,5 @@ secrets {
     // 1. Open the root project's local.properties file
     // 2. Add this line, where YOUR_API_KEY is your API key:
     //        MAPS_API_KEY=YOUR_API_KEY
-    defaultPropertiesFileName 'local.defaults.properties'
+    defaultPropertiesFileName 'local.properties'
 }

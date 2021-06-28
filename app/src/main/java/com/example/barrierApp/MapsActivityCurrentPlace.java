@@ -20,7 +20,10 @@ import android.location.Location;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -116,6 +119,27 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
         });
     }
     // [END maps_current_place_on_create]
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.reg_settings) {
+//            Intent intent = new Intent(MapsActivityCurrentPlace.this, RegisterActivity.class);
+//            startActivity(intent);
+            // создание интента и передача координат в качестве ключей
+            Intent intent = new Intent(MapsActivityCurrentPlace.this, RegisterActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     /**
      * Сохранение состояния карты в момент перевода активности в ждущий режим.

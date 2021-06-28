@@ -315,8 +315,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_check_circle_24" />
-                            <entry key="sourceFile" value="C:\AndrProj\android-samples\tutorials\java\CurrentPlaceDetailsOnMap" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_traffic_semaphore_red_light" />
+                            <entry key="sourceFile" value="C:\Users\dmura\Desktop\traffic-semaphore-red-light.svg" />
                           </map>
                         </option>
                       </PersistentState>

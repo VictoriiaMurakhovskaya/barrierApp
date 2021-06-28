@@ -2,8 +2,11 @@ package com.example.barrierApp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -28,5 +31,17 @@ public class MessageActivity extends AppCompatActivity {
         TextView longView  = findViewById(R.id.textView2);
         longView.setText(String.format(rus, "Долгота: %f\nШирота: %f",
                 latlng.getLongitude(), latlng.getLatitude()));
+
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 1000);
+
+        Intent intent = new Intent(MessageActivity.this, ResultActivity.class);
+        startActivity(intent);
+
     }
 }
