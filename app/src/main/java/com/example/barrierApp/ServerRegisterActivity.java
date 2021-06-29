@@ -16,13 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Locale;
 
 public class ServerRegisterActivity extends AppCompatActivity {
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.context = getApplicationContext();
+        Context context = getApplicationContext();
 
         // привязка формы к активности
         setContentView(R.layout.server_data);
@@ -31,16 +30,16 @@ public class ServerRegisterActivity extends AppCompatActivity {
         Locale rus = new Locale("ru", "RU");
 
         SharedPreferences myPreferences
-                = PreferenceManager.getDefaultSharedPreferences(this.context);
+                = PreferenceManager.getDefaultSharedPreferences(context);
 
         String server_ip = myPreferences.getString("SERVER_IP", "0.0.0.0");
-        Integer server_port = myPreferences.getInt("PORT", 22);
+        int server_port = myPreferences.getInt("PORT", 22);
 
         TextView serverText = findViewById(R.id.textServer);
         TextView portNumber = findViewById(R.id.numberPort);
 
         serverText.setText(server_ip);
-        portNumber.setText(server_port.toString());
+        portNumber.setText(Integer.toString(server_port));
 
         Button pushButton = findViewById(R.id.pushServer);
         pushButton.setOnClickListener(new View.OnClickListener() {

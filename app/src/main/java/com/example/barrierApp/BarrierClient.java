@@ -6,6 +6,7 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
+
 /**
  * Класс, осуществляющий взаимодействие с Thrift API сервера
  * @see BarrierClient
@@ -18,11 +19,14 @@ import org.apache.thrift.transport.TTransport;
  * и присылает соответствующий ответ, который далее обрабатывается в приложении
  */
 
-public class BarrierClient {
+public class BarrierClient{
+    String IP_ADDRESS;
+    int PORT;
 
-    // константы параметров подключения. При продакшене нужно вынести в конструктор класса
-    private final String IP_ADDRESS = "localhost";
-    private final int PORT = 9090;
+    public BarrierClient (String ip, int port){
+        this.IP_ADDRESS = ip;
+        this.PORT = port;
+    }
 
     /**
      * Метод добавления пользователя в БД приложения с использованием Thrift API сервера
@@ -68,6 +72,7 @@ public class BarrierClient {
      * соответствующую форму успех/отказ
      */
     public boolean openBarrier(String id, double longitude, double latitude) {
+
         try {
             // открытие соединения
             TTransport transport;
