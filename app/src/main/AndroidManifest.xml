@@ -26,6 +26,10 @@
             android:label="Ответ сервера">
         </activity>
 
+        <activity
+            android:name="com.example.barrierApp.ServerRegisterActivity"
+            android:label="Настройки сервера">
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

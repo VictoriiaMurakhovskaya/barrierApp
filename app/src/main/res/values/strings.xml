@@ -22,6 +22,7 @@
     <string name="title_activity_login">Открытие…</string>
     <string name="longitude">Долгота</string>
     <string name="first_menu_item">Регистрация</string>
+    <string name="second_menu_item">Данные сервера</string>
     <string name="id_indicatiir">ID: ---</string>
     <string name="login_hint">Введите логин</string>
     <string name="send_id">Отправить</string>

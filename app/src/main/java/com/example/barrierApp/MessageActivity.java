@@ -45,11 +45,16 @@ public class MessageActivity extends AppCompatActivity {
             }
         }, 1000);
 
+        boolean openResult = false;
         BarrierClient client = new BarrierClient();
-        boolean openResult = client.openBarrier(ANDROID_ID, latlng.getLongitude(), latlng.getLatitude());
+        try {
+            openResult = client.openBarrier(ANDROID_ID, latlng.getLongitude(), latlng.getLatitude());
+        } catch (Exception e) {
+            String message = e.getMessage();
+        }
 
         Intent intent = new Intent(MessageActivity.this, ResultActivity.class);
-        intent.putExtra("open_result", false);
+        intent.putExtra("open_result", openResult);
         startActivity(intent);
 
     }

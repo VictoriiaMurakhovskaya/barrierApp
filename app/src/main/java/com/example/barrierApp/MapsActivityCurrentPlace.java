@@ -14,11 +14,13 @@
 
 package com.example.barrierApp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -131,10 +133,11 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.reg_settings) {
-//            Intent intent = new Intent(MapsActivityCurrentPlace.this, RegisterActivity.class);
-//            startActivity(intent);
             // создание интента и передача координат в качестве ключей
             Intent intent = new Intent(MapsActivityCurrentPlace.this, RegisterActivity.class);
+            startActivity(intent);
+        } else if ((id == R.id.server_settings)) {
+            Intent intent = new Intent(MapsActivityCurrentPlace.this, ServerRegisterActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
