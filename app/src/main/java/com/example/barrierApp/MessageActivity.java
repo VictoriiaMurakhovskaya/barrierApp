@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.widget.TextView;
@@ -32,10 +31,13 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        // получение id устройства
         final ContentResolver contxt = getBaseContext().getContentResolver();
         final String ANDROID_ID = Settings.Secure.getString(contxt, Settings.Secure.ANDROID_ID);
+
         super.onCreate(savedInstanceState);
 
+        // получение основного контекста приложения и чтение данных из хранилища устройства
         Context context = getApplicationContext();
         SharedPreferences myPreferences
                 = PreferenceManager.getDefaultSharedPreferences(context);
@@ -57,22 +59,26 @@ public class MessageActivity extends AppCompatActivity {
         longView.setText(String.format(rus, "Долгота: %f\nШирота: %f",
                 latlng.getLongitude(), latlng.getLatitude()));
 
-
-
+        // вынесение запроса на сервер в отдельный поток и обработка Future из этого потока
         Handler openerHandler = new Handler(getMainLooper());
         openerHandler.post(new Runnable() {
             @Override
             public void run() {
+                // запрос на сервер
                 ExecutorService executor = Executors.newSingleThreadExecutor();
                 Future<Boolean> openResult  = executor.submit(new RunOpener(ANDROID_ID,
                                                       latlng.getLongitude(), latlng.getLatitude(),
                                                       server_ip, server_port));
                 try {
+                    // ожидание ответа Future с таймером в 5 секунд
                     openerResult = openResult.get(5, TimeUnit.SECONDS);
                 } catch (ExecutionException | InterruptedException | TimeoutException e) {
+                    // по истечении таймера без ответа - неудача запроса
                     e.printStackTrace();
                     openerResult = false;
                 }
+
+                // создание нового интента с демонстрацией формы результата и закрытие текущей
                 Intent intent = new Intent(MessageActivity.this, ResultActivity.class);
                 intent.putExtra("open_result", openerResult);
                 startActivity(intent);
@@ -80,26 +86,11 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-
-//
-//        try{
-//            openerResult = openResult.get(5, TimeUnit.SECONDS);
-//        } catch (InterruptedException | ExecutionException | TimeoutException e) {
-//            openerResult = false;
-//        }
-//
-//        final Handler handler = new Handler(Looper.getMainLooper());
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                finish();
-//            }
-//        }, 500);
-//
-//
     }
 }
 
+// класс реализующий Callable
+// запуск запроса на сервер в отдельном потоке и возврат результата через call
 class RunOpener implements Callable<Boolean>{
     String id;
     double longitude;
