@@ -71,7 +71,7 @@ public class MessageActivity extends AppCompatActivity {
                                                       server_ip, server_port));
                 try {
                     // ожидание ответа Future с таймером в 5 секунд
-                    openerResult = openResult.get(5, TimeUnit.SECONDS);
+                    openerResult = openResult.get(100, TimeUnit.SECONDS);
                 } catch (ExecutionException | InterruptedException | TimeoutException e) {
                     // по истечении таймера без ответа - неудача запроса
                     e.printStackTrace();
